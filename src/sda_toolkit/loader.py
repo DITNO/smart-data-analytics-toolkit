@@ -3,6 +3,7 @@ loader.py — File Loading Module (Hour 2-5)
 """
 
 from pathlib import Path
+from sys import exception
 import pandas as pd
 
 """
@@ -37,3 +38,12 @@ def load_csv(path):
 
 result = load_csv("data/raw/sample.csv")
 print(result)    
+
+def load_excel(path, sheet_name = 0):
+    file_path = _validate_path(path)
+    try:
+        df = pd.read_excel(file_path, sheet_name = sheet_name)
+        return df
+    except exception as e:
+        print(f"error something went wrong: {e}")
+        return None
