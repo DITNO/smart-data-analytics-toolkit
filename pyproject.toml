@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sda-toolkit"
+version = "0.1.0"
+description = "Smart Data Analytics Toolkit — load, clean, analyze, visualize, and report on tabular data."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Priyanshu" }]
+dependencies = [
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "matplotlib>=3.8",
+    "openpyxl>=3.1",
+    "pyyaml>=6.0",
+]
+
+[project.scripts]
+sda = "sda_toolkit.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

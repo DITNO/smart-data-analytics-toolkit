@@ -1,0 +1,18 @@
+# Default configuration for the Smart Data Analytics Toolkit
+# Loaded by sda_toolkit.logging_config.load_config()
+
+logging:
+  level: INFO
+  log_file: logs/sda_toolkit.log
+
+paths:
+  raw_data_dir: data/raw
+  processed_data_dir: data/processed
+  reports_dir: reports
+
+cleaning:
+  missing_value_strategy: mean   # options: mean, median, drop, fill
+
+visualization:
+  default_charts: [bar, line, histogram]
+  dpi: 150
