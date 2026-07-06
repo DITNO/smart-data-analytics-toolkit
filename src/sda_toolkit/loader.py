@@ -36,14 +36,42 @@ def load_csv(path):
         print(f'error something is wrong with the csv file: {e}')
         return None
 
-result = load_csv("data/raw/sample.csv")
-print(result)    
+# result = load_csv("data/raw/sample.csv")
+# print(result)    
 
 def load_excel(path, sheet_name = 0):
     file_path = _validate_path(path)
     try:
         df = pd.read_excel(file_path, sheet_name = sheet_name)
         return df
-    except exception as e:
+    except Exception as e:
         print(f"error something went wrong: {e}")
         return None
+
+def load_json(path):
+    file_path = _validate_path(path)
+    try:
+        df = pd.read_json(file_path)
+        return df
+    except Exception as e:
+        print(f"errror something went wrong: {e}")
+        return None
+    
+def load_file(path):
+    file_path = _validate_path(path)
+    extension = Path(path).suffix
+
+    if extension == '.csv':
+        return load_csv(file_path)
+    elif extension == '.xlsx':
+        return load_excel(file_path)
+    elif extension == '.json':
+        return load_json(file_path)
+    elif extension == '.xls':
+        return load_excel(file_path)
+    else:
+        print(f'Unsupported file type  error: {extension}')
+        return None
+    
+# result = load_file("data/raw/sample.csv")
+# print(result)
