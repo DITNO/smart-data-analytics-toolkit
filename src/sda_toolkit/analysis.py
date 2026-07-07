@@ -27,3 +27,15 @@ def value_counts_report(df):
         print(results[col])
     return results
 
+def detect_outliers(df):
+    outliers = {}
+    for col in df.select_dtypes(include='number').columns:
+        q1 = df[col].quantile(0.25)
+        q3 = df[col].quantile(0.75)
+        iqr = q3 - q1
+        lower = q3 - 1.5*iqr
+        upper = q3 + 1.5*iqr
+        outliers[col] = len(df[(df[col] < lower) | (df[col] > upper)])
+    print(f'outliers as follow: {outliers}')
+    return outliers
+
