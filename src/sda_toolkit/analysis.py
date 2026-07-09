@@ -8,16 +8,23 @@
 # - detect_outliers(df, method="iqr"|"zscore") -> dict
 # """
 
+#Descriptive statistics of the dataset and returns it as a dataframe
 
 def summary_stats(df):
     stats = df.describe()
     print(f'Data as follow: {stats}')
     return stats
 
+
+#find the correlation matrix of the dataset and returns it as a dataframe
+
 def correlation_matrix(df):
     corr_matrix = df.corr(numeric_only=True)
     print(f'correlation matrix as follow:{corr_matrix}')
     return corr_matrix
+
+
+#counts the values of each column in the dataset and returns a dictionary with the counts
 
 def value_counts_report(df):
     results = {}
@@ -26,6 +33,9 @@ def value_counts_report(df):
         print(f'{col}')
         print(results[col])
     return results
+
+
+#removers the extreme values from the dataset using the IQR method
 
 def detect_outliers(df):
     outliers = {}
