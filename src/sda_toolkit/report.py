@@ -12,11 +12,18 @@ def export_cleaned_csv(df, output_path):
     df.to_csv(output_path,index = False)
     print(f'Cleaned csv saved to: {output_path}')
 
+
+
+# with open(drawer) as d:     - for the open fnc below
+#     put something in drawer
+# # drawer closes automatically when you're done
+
+
 def export_summary_report(stats, output_path):
     content = "\n".join(f"{key}: {value}" for key, value in stats.items())
     with open(output_path, 'w') as f:
-        f.write("Some test")
-    print("done")
+        f.write(content)
+    print(f"Summary report saved to:{output_path}")
 
 
 # Whenever a function saves files, ask yourself:
