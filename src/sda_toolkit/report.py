@@ -28,6 +28,7 @@ def export_summary_report(stats, output_path):
 
 def bundle_report(df, stats, output_dir):
     from pathlib import Path
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
     csv_path = Path(output_dir) / "cleaned_data.csv"
     report_path = Path(output_dir) / "summary_report.txt"
     export_cleaned_csv(df, csv_path)
