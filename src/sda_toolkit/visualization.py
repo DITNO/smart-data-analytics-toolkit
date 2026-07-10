@@ -63,3 +63,14 @@ def Scatter_plot(df,x,y, save_path = None):
     else:
         plt.show()
     plt.close()
+
+def pie_chart(df, column , save_path = None):
+    fig, ax = plt.subplots()
+    ax.pie(df[column].value_counts(),labels = df[column].value_counts().index)
+    ax.set_title('Pie Chart')
+    plt.tight_layout()
+    if save_path:
+        plt.savefig(save_path)
+    else:
+        plt.show()
+    plt.close()
