@@ -1,8 +1,19 @@
-"""
-report.py — Report Export Module (Hour 14-17)
+# """
+# report.py — Report Export Module (Hour 14-17)
 
-TODO (Hour 14-17):
-- export_cleaned_csv(df, output_path)
-- export_summary_report(stats_dict, output_path)   # markdown or txt summary
-- bundle_report(df, charts_dir, output_dir)         # combine charts + summary
-"""
+# TODO (Hour 14-17):
+# - export_cleaned_csv(df, output_path)
+# - export_summary_report(stats_dict, output_path)   # markdown or txt summary
+# - bundle_report(df, charts_dir, output_dir)         # combine charts + summary
+# """
+
+
+def export_cleaned_csv(df, output_path):
+    df.to_csv(output_path,index = False)
+    print(f'Cleaned csv saved to: {output_path}')
+
+def export_summary_report(stats, output_path):
+    content = "\n".join(f"{key}: {value}" for key, value in stats.items())
+    with open(output_path, 'w') as f:
+        f.write("Some test")
+    print("done")
