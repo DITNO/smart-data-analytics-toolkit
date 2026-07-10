@@ -19,6 +19,13 @@ def export_summary_report(stats, output_path):
     print("done")
 
 
+# Whenever a function saves files, ask yourself:
+
+# What folder am I saving into? → that's a parameter
+# What should the files be named? → decide that inside the function
+# How do I combine folder + filename? → Path(folder) / "filename"
+
+
 def bundle_report(df, stats, output_dir):
     from pathlib import Path
     csv_path = Path(output_dir) / "cleaned_data.csv"
