@@ -8,6 +8,21 @@
 # - scatter_plot(df, x, y, save_path=None)
 # - pie_chart(df, column, save_path=None)
 # - save_all_charts(df, output_dir)   # batch-generate standard chart set
+
+
+
+
+# Basic flow while writing the function for the charts
+# Create the figure
+# Draw the data
+# Label everything
+# Adjust layout
+# Save or show
+
+
+
+
+
 # """
 
 import matplotlib.pyplot as plt
