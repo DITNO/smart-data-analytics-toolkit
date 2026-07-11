@@ -1,23 +1,28 @@
-"""
-loader.py — File Loading Module (Hour 2-5)
-"""
+# """
+# loader.py — File Loading Module (Hour 2-5)
+# """
 
 from pathlib import Path
-from sys import exception
 import pandas as pd
 
-"""
-Responsible for loading datasets from CSV, Excel, and JSON sources
-into a pandas DataFrame, with error handling for missing files,
-bad formats, and encoding issues.
+class FileLoadError(Exception):
+    pass
 
-TODO (Hour 2-5):
-- load_csv(path) -> pd.DataFrame
-- load_excel(path, sheet_name=0) -> pd.DataFrame
-- load_json(path) -> pd.DataFrame
-- load_file(path) -> pd.DataFrame   # auto-detect by extension
-- Custom exceptions: UnsupportedFileTypeError, FileLoadError
-"""
+class UnsupportedFileTypeError(Exception):
+    pass
+
+# """
+# Responsible for loading datasets from CSV, Excel, and JSON sources
+# into a pandas DataFrame, with error handling for missing files,
+# bad formats, and encoding issues.
+
+# TODO (Hour 2-5):
+# - load_csv(path) -> pd.DataFrame
+# - load_excel(path, sheet_name=0) -> pd.DataFrame
+# - load_json(path) -> pd.DataFrame
+# - load_file(path) -> pd.DataFrame   # auto-detect by extension
+# - Custom exceptions: UnsupportedFileTypeError, FileLoadError
+# """
 def _validate_path(path):
     file_path = Path(path)
     if not file_path.exists():
@@ -70,8 +75,7 @@ def load_file(path):
     elif extension == '.xls':
         return load_excel(file_path)
     else:
-        print(f'Unsupported file type  error: {extension}')
-        return None
+            raise UnsupportedFileTypeError(f"Unsupported file type: {extension}")
     
 # result = load_file("data/raw/sample.csv")
 # print(result)
