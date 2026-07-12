@@ -92,3 +92,50 @@ sda report data/raw/sample.csv --output reports/
 ## License
 
 MIT
+
+
+| Hour  | Milestone                                   | Status |
+|-------|----------------------------------------------|--------|
+| 0–2   | Setup: repo, venv, structure, requirements    | ✅ |
+| 2–5   | File loader                                   | ✅ |
+| 5–8   | Data cleaning                                 | ✅ |
+| 8–11  | Exploratory analysis                          | ✅ |
+| 11–14 | Visualization                                 | ✅ |
+| 14–17 | Report export                                 | ✅ |
+| 17–20 | CLI                                           | ✅ |
+| 20–22 | Logging & configuration                       | ✅ |
+| 22–24 | Testing, docs, screenshots, release            | ✅ |
+
+
+
+
+- [x] Load datasets from CSV, Excel, and JSON
+- [x] Clean data: duplicates, missing values, datatype fixes
+- [x] Exploratory analysis: summary stats, correlations, value counts
+- [x] Visualizations: bar, line, histogram, scatter, pie
+- [x] Export cleaned data + summary reports
+- [x] Full CLI
+- [x] Logging and configuration
+- [x] Test suite with pytest
+
+
+
+
+## Usage
+
+```bash
+# Analyze a dataset
+python src/sda_toolkit/cli.py analyze data/raw/sample.csv
+
+# Clean a dataset  
+python src/sda_toolkit/cli.py clean data/raw/sample.csv
+
+# Visualize - bar chart
+python src/sda_toolkit/cli.py visualize data/raw/sample.csv --chart bar --x city --y salary
+
+# Visualize - histogram
+python src/sda_toolkit/cli.py visualize data/raw/sample.csv --chart histogram --column age
+
+# Generate full report
+python src/sda_toolkit/cli.py report data/raw/sample.csv
+```
