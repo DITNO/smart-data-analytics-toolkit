@@ -139,3 +139,6 @@ python src/sda_toolkit/cli.py visualize data/raw/sample.csv --chart histogram --
 # Generate full report
 python src/sda_toolkit/cli.py report data/raw/sample.csv
 ```
+
+
+<!-- Thank you ;-] -->
