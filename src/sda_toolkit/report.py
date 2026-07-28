@@ -1,26 +1,38 @@
 # """
 # report.py — Report Export Module (Hour 14-17)
-
-# TODO (Hour 14-17):
-# - export_cleaned_csv(df, output_path)
-# - export_summary_report(stats_dict, output_path)   # markdown or txt summary
-# - bundle_report(df, charts_dir, output_dir)         # combine charts + summary
+#
+# Exports cleaned DataFrames and summary statistics to disk:
+#   - export_cleaned_csv()    — saves cleaned DataFrame as CSV
+#   - export_summary_report() — writes readable stats to a .txt file
+#   - bundle_report()         — does both in one call, creating the
+#                               output directory if needed
 # """
 
 
 def export_cleaned_csv(df, output_path):
-    df.to_csv(output_path,index = False)
+    """
+    Save the (cleaned) DataFrame to a CSV file.
+
+    Uses index=False so the row numbers aren't written to the file.
+    """
+    df.to_csv(output_path, index=False)
     print(f'Cleaned csv saved to: {output_path}')
 
 
-
-# with open(drawer) as d:     - for the open fnc below
-#     put something in drawer
-# # drawer closes automatically when you're done
-
-
 def export_summary_report(stats, output_path):
-    # stats is a DataFrame from df.describe(); format it as a readable table
+    """
+    Write summary statistics to a human-readable text file.
+
+    `stats` is expected to be a DataFrame from df.describe().
+    Iterates column-by-column and stat-by-stat to produce a
+    clean, readable report.
+
+    FIX: The original code used:
+        content = "\n".join(f"{key}: {value}" for key, value in stats.items())
+    On a DataFrame, .items() yields (column_name, Series) pairs.
+    f-string formatting a Series produces a garbled mess. The fix
+    iterates properly: for each column, print each stat on its own line.
+    """
     lines = ["=== Summary Statistics ===", ""]
     for col_name, col_stats in stats.items():
         lines.append(f"Column: {col_name}")
@@ -34,14 +46,13 @@ def export_summary_report(stats, output_path):
     print(f"Summary report saved to: {output_path}")
 
 
-# Whenever a function saves files, ask yourself:
-
-# What folder am I saving into? → that's a parameter
-# What should the files be named? → decide that inside the function
-# How do I combine folder + filename? → Path(folder) / "filename"
-
-
 def bundle_report(df, stats, output_dir):
+    """
+    Save both cleaned CSV and summary report into one directory.
+
+    Creates the output directory (and parents) if they don't exist.
+    Files are named 'cleaned_data.csv' and 'summary_report.txt'.
+    """
     from pathlib import Path
     Path(output_dir).mkdir(parents=True, exist_ok=True)
     csv_path = Path(output_dir) / "cleaned_data.csv"
