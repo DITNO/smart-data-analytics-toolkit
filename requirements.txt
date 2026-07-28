@@ -3,4 +3,5 @@ numpy>=1.26
 matplotlib>=3.8
 openpyxl>=3.1
 pyyaml>=6.0
+streamlit>=1.60
 pytest>=8.0
