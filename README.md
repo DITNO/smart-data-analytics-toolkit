@@ -1,144 +1,131 @@
 # Smart Data Analytics Toolkit
 
-A command-line Python application that loads, cleans, analyzes, visualizes,
-and reports on tabular datasets (CSV / Excel / JSON) — built as a
-professional-grade portfolio project ahead of moving into Machine Learning.
+A **CLI + Web** Python application that loads, cleans, analyzes, visualizes,
+and reports on tabular datasets (CSV / Excel / JSON). Built as a
+professional-grade portfolio project with a full test suite.
 
-> Status: 🚧 Hour 0–2 complete (project scaffold). Build in progress.
+🌐 **Try the web app:** Deploy your own copy on [Streamlit Cloud](https://streamlit.io/cloud)
+(see [Deployment](#deployment) below).
 
-## Why this project exists
+---
 
-Rather than working through another disconnected ML tutorial, this project
-is meant to mirror what a real data-tooling codebase looks like: a clean
-package layout, error handling, logging, tests, a CLI, and documentation —
-all built around one coherent use case.
+## Quick Start
 
-## Features (target scope)
+```bash
+git clone https://github.com/DITNO/smart-data-analytics-toolkit.git
+cd smart-data-analytics-toolkit
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+pip install -e .
+```
 
-- [ ] Load datasets from CSV, Excel, and JSON with error handling
-- [ ] Clean data: duplicates, missing values, datatype fixes
-- [ ] Exploratory analysis: summary stats, correlations, value counts
-- [ ] Visualizations: bar, line, histogram, scatter, pie
-- [ ] Export cleaned data + summary reports
-- [ ] Full CLI (`sda load ...`, `sda clean ...`, `sda analyze ...`, etc.)
-- [ ] Logging and YAML-based configuration
-- [ ] Test suite with pytest
+### CLI Usage
 
-## Project structure
+```bash
+# Analyze a dataset
+sda analyze data/raw/sample.csv
+
+# Clean a dataset
+sda clean data/raw/sample.csv
+
+# Visualize
+sda visualize data/raw/sample.csv --chart bar --x city --y salary
+sda visualize data/raw/sample.csv --chart histogram --column age
+
+# Generate full report
+sda report data/raw/sample.csv
+```
+
+### Web Dashboard
+
+```bash
+streamlit run app.py
+# Opens at http://localhost:8501
+```
+
+---
+
+## Features
+
+- ✅ **Load** datasets from CSV, Excel (`.xlsx`/`.xls`), and JSON with error handling
+- ✅ **Clean** data: remove duplicates, handle missing values (mean/median/drop/fill), auto-fix data types
+- ✅ **Analyze**: summary statistics, correlation matrix, IQR outlier detection, value counts
+- ✅ **Visualize**: bar, line, histogram, scatter, and pie charts
+- ✅ **Export**: download cleaned CSV + formatted summary report
+- ✅ **Web Dashboard**: interactive Streamlit UI (upload → clean → analyze → chart → download)
+- ✅ **CLI**: full command-line interface for scripting and automation
+- ✅ **Logging & Config**: YAML-based configuration, file + console logging
+- ✅ **Tests**: 104 pytest tests covering all modules
+
+---
+
+## Project Structure
 
 ```
 smart-data-analytics-toolkit/
-├── src/sda_toolkit/       # Application package
-│   ├── loader.py          # File loading (CSV/Excel/JSON)
-│   ├── cleaning.py        # Data cleaning
-│   ├── analysis.py        # Exploratory analysis
-│   ├── visualization.py   # Charts
-│   ├── report.py          # Report export
-│   ├── cli.py             # Command-line interface
-│   └── logging_config.py  # Logging & config
-├── tests/                 # Test suite
+├── app.py                  # Streamlit web dashboard
+├── src/sda_toolkit/
+│   ├── loader.py           # File loading (CSV/Excel/JSON)
+│   ├── cleaning.py         # Data cleaning
+│   ├── analysis.py         # Exploratory analysis
+│   ├── visualization.py    # Charts
+│   ├── report.py           # Report export
+│   ├── cli.py              # CLI entry point
+│   └── logging_config.py   # Logging & config
+├── tests/                  # 104 pytest tests
 ├── data/raw/               # Input datasets (gitignored)
 ├── data/processed/         # Cleaned output (gitignored)
 ├── reports/                # Generated reports (gitignored)
-├── assets/screenshots/     # README screenshots
+├── config.yaml             # Default configuration
 ├── requirements.txt
 ├── pyproject.toml
 └── README.md
 ```
 
-## Setup
+---
 
-```bash
-git clone <your-repo-url>
-cd smart-data-analytics-toolkit
-python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-pip install -e .                 # installs the `sda` CLI command
+## Deployment
+
+### Streamlit Community Cloud (free)
+
+1. Go to [streamlit.io/cloud](https://streamlit.io/cloud)
+2. Sign in with your GitHub account
+3. Click **"New app"** → select this repository
+4. Set **Main file** to `app.py`
+5. Click **Deploy**
+
+Once deployed, your app will be live at a URL like:
+```
+https://YOUR_USERNAME-smart-data-analytics-toolkit.streamlit.app
 ```
 
-## Usage
+> **Requirements for deployment:** The `streamlit` dependency is already in
+> `requirements.txt` and `pyproject.toml`. No additional setup needed.
 
-> CLI commands will be documented here once Hour 17–20 (CLI build) is complete.
+### Other hosting options
 
-```bash
-sda load data/raw/sample.csv
-sda clean data/raw/sample.csv --strategy mean
-sda analyze data/raw/sample.csv
-sda visualize data/raw/sample.csv --chart bar --column category
-sda report data/raw/sample.csv --output reports/
-```
+- **Hugging Face Spaces**: Create a Space with Streamlit SDK and point it to this repo
+- **Self-hosted**: `streamlit run app.py --server.port 80` behind a reverse proxy
 
-## Architecture
+---
 
-> Architecture diagram and module interaction notes go here once the
-> pipeline (loader → cleaning → analysis → visualization → report) is wired
-> together in the CLI.
-
-## Build log
+## Build Log
 
 | Hour  | Milestone                                   | Status |
-|-------|----------------------------------------------|--------|
-| 0–2   | Setup: repo, venv, structure, requirements    | ✅ |
-| 2–5   | File loader                                   | ⬜ |
-| 5–8   | Data cleaning                                 | ⬜ |
-| 8–11  | Exploratory analysis                          | ⬜ |
-| 11–14 | Visualization                                 | ⬜ |
-| 14–17 | Report export                                 | ⬜ |
-| 17–20 | CLI                                           | ⬜ |
-| 20–22 | Logging & configuration                       | ⬜ |
-| 22–24 | Testing, docs, screenshots, release            | ⬜ |
+|-------|---------------------------------------------|--------|
+| 0–2   | Setup: repo, venv, structure, requirements  | ✅ |
+| 2–5   | File loader                                 | ✅ |
+| 5–8   | Data cleaning                               | ✅ |
+| 8–11  | Exploratory analysis                        | ✅ |
+| 11–14 | Visualization                               | ✅ |
+| 14–17 | Report export                               | ✅ |
+| 17–20 | CLI                                         | ✅ |
+| 20–22 | Logging & configuration                     | ✅ |
+| 22–24 | Testing, docs, screenshots, release         | ✅ |
+
+---
 
 ## License
 
 MIT
-
-
-| Hour  | Milestone                                   | Status |
-|-------|----------------------------------------------|--------|
-| 0–2   | Setup: repo, venv, structure, requirements    | ✅ |
-| 2–5   | File loader                                   | ✅ |
-| 5–8   | Data cleaning                                 | ✅ |
-| 8–11  | Exploratory analysis                          | ✅ |
-| 11–14 | Visualization                                 | ✅ |
-| 14–17 | Report export                                 | ✅ |
-| 17–20 | CLI                                           | ✅ |
-| 20–22 | Logging & configuration                       | ✅ |
-| 22–24 | Testing, docs, screenshots, release            | ✅ |
-
-
-
-
-- [x] Load datasets from CSV, Excel, and JSON
-- [x] Clean data: duplicates, missing values, datatype fixes
-- [x] Exploratory analysis: summary stats, correlations, value counts
-- [x] Visualizations: bar, line, histogram, scatter, pie
-- [x] Export cleaned data + summary reports
-- [x] Full CLI
-- [x] Logging and configuration
-- [x] Test suite with pytest
-
-
-
-
-## Usage
-
-```bash
-# Analyze a dataset
-python src/sda_toolkit/cli.py analyze data/raw/sample.csv
-
-# Clean a dataset  
-python src/sda_toolkit/cli.py clean data/raw/sample.csv
-
-# Visualize - bar chart
-python src/sda_toolkit/cli.py visualize data/raw/sample.csv --chart bar --x city --y salary
-
-# Visualize - histogram
-python src/sda_toolkit/cli.py visualize data/raw/sample.csv --chart histogram --column age
-
-# Generate full report
-python src/sda_toolkit/cli.py report data/raw/sample.csv
-```
-
-
-<!-- Thank you ;-] -->
