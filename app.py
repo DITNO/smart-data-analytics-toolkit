@@ -2,11 +2,20 @@
 SDA Toolkit - Streamlit Dashboard
 """
 
+import sys
+from pathlib import Path
+
+# Add src/ to module search path so 'sda_toolkit' is found even when
+# 'pip install -e .' hasn't been run (e.g. on Streamlit Cloud).
+# Streamlit Cloud only runs requirements.txt, not the editable install.
+_src_path = str(Path(__file__).resolve().parent / 'src')
+if _src_path not in sys.path:
+    sys.path.insert(0, _src_path)
+
 import io, matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pandas as pd, streamlit as st
-from pathlib import Path
 import sda_toolkit
 from sda_toolkit import cleaning, analysis, report
 
