@@ -8,7 +8,6 @@
 # - cleaning_report(df_before, df_after) -> dict   # summary of what changed
 # """
 
-from turtle import pd
 import pandas as pd
 
 
@@ -25,7 +24,6 @@ def drop_duplicates(df):
     return df_cleaned
 
 def handle_missing(df, strategy="mean"):
-
     print(df.isnull().sum().sum(), "missing values before cleaning")
 
     if strategy == "drop":
@@ -37,16 +35,19 @@ def handle_missing(df, strategy="mean"):
     elif strategy == "fill":
         df_cleaned = df.fillna(0)
     else:
-        print(f"unknown stategy: {strategy}. no changes made.")
-        return df_cleaned
+        print(f"unknown strategy: {strategy}. no changes made.")
+        return df
 
     return df_cleaned
 
 def fix_dtype(df):
-    # convert object columns to string
-    for col in df:
-        df[col] = pd.to_numeric(df[col],errors='ignore')
-    
+    # Attempt to convert object columns to numeric where possible
+    for col in df.select_dtypes(include=["object", "str"]).columns:
+        converted = pd.to_numeric(df[col], errors="coerce")
+        # Only keep numeric conversion if at least half the values converted
+        if converted.notna().sum() >= len(converted) * 0.5:
+            df[col] = converted
+
     print("Data types after cleaning:")
     print(df.dtypes)
     return df

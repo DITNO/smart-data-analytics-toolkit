@@ -20,10 +20,18 @@ def export_cleaned_csv(df, output_path):
 
 
 def export_summary_report(stats, output_path):
-    content = "\n".join(f"{key}: {value}" for key, value in stats.items())
+    # stats is a DataFrame from df.describe(); format it as a readable table
+    lines = ["=== Summary Statistics ===", ""]
+    for col_name, col_stats in stats.items():
+        lines.append(f"Column: {col_name}")
+        lines.append("-" * (len(col_name) + 8))
+        for stat_name, stat_value in col_stats.items():
+            lines.append(f"  {stat_name}: {stat_value}")
+        lines.append("")
+    content = "\n".join(lines)
     with open(output_path, 'w') as f:
         f.write(content)
-    print(f"Summary report saved to:{output_path}")
+    print(f"Summary report saved to: {output_path}")
 
 
 # Whenever a function saves files, ask yourself:

@@ -8,11 +8,16 @@
 # - detect_outliers(df, method="iqr"|"zscore") -> dict
 # """
 
+import pandas as pd
+
 #Descriptive statistics of the dataset and returns it as a dataframe
 
 def summary_stats(df):
+    if df.empty or df.shape[1] == 0:
+        print("DataFrame is empty — no statistics to report.")
+        return pd.DataFrame()
     stats = df.describe()
-    print(f'Data as follow: {stats}')
+    print(f'Summary statistics:\n{stats}')
     return stats
 
 
@@ -43,7 +48,7 @@ def detect_outliers(df):
         q1 = df[col].quantile(0.25)
         q3 = df[col].quantile(0.75)
         iqr = q3 - q1
-        lower = q3 - 1.5*iqr
+        lower = q1 - 1.5*iqr
         upper = q3 + 1.5*iqr
         outliers[col] = len(df[(df[col] < lower) | (df[col] > upper)])
     print(f'outliers as follow: {outliers}')

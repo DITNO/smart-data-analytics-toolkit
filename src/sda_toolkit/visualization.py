@@ -36,9 +36,10 @@ def bar_chart(df,x,y, save_path = None):
     plt.tight_layout()
     if save_path:
         plt.savefig(save_path)
+        plt.close(fig)
     else:
         plt.show()
-    plt.close()
+        plt.close(fig)
 
 def line_chart(df,x,y,save_path = None):
     fig, ax = plt.subplots()
@@ -48,10 +49,11 @@ def line_chart(df,x,y,save_path = None):
     ax.set_title(f'{x} vs {y}')
     plt.tight_layout()
     if save_path:
-            plt.savefig(save_path)
+        plt.savefig(save_path)
+        plt.close(fig)
     else:
-            plt.show()
-    plt.close()
+        plt.show()
+        plt.close(fig)
 
 def histogram(df,column , bins=20, save_path = None):
     fig, ax = plt.subplots()
@@ -62,9 +64,10 @@ def histogram(df,column , bins=20, save_path = None):
     plt.tight_layout()
     if save_path:
         plt.savefig(save_path)
+        plt.close(fig)
     else:
         plt.show()
-    plt.close()
+        plt.close(fig)
 
 def scatter_plot(df,x,y, save_path = None):
     fig, ax = plt.subplots()
@@ -75,9 +78,10 @@ def scatter_plot(df,x,y, save_path = None):
     plt.tight_layout()
     if save_path:
         plt.savefig(save_path)
+        plt.close(fig)
     else:
         plt.show()
-    plt.close()
+        plt.close(fig)
 
 def pie_chart(df, column , save_path = None):
     fig, ax = plt.subplots()
@@ -86,6 +90,7 @@ def pie_chart(df, column , save_path = None):
     plt.tight_layout()
     if save_path:
         plt.savefig(save_path)
+        plt.close(fig)
     else:
         plt.show()
-    plt.close()
+        plt.close(fig)
